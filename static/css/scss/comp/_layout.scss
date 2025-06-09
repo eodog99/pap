@@ -1,0 +1,79 @@
+     * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px
+    }
+
+    a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    header{
+        background-color: #136D94;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        color: #fff;
+    }
+    main{
+        display: flex;
+         height: calc(100vh - 84px);         
+    }
+
+
+    nav {
+        width: 200px;
+        height: calc(100vh - 84px);
+        display: block;
+        padding: 0px;
+        overflow: visible;
+        transition: all 0.3s ease;
+        background: white;
+        border-right: 1px solid #ddd;
+        position: relative;
+        z-index: 10;
+    }
+
+    .content {
+        width: calc(100vw - 200px);
+        height: calc(100vh - 84px);
+    }
+    
+    .content-head {
+        height: 44px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #ccc;
+   
+    }
+
+    .content-body{
+        width: 100%;
+        height: calc(100% - 76px);
+        overflow: auto;  /* 스크롤 */
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .content-foot {
+        background-color: azure;
+        height: 32px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+
+    #footerWrap {
+        background-color: #EDEDED;
+        height: 34px;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 20px;
+        border-top: 1px solid #B3B4B7;
+    }

@@ -1,0 +1,123 @@
+
+    .menu-item {
+        display: flex;
+        align-items: center;
+        // padding: 20px 12px 0px 12px;
+        flex-direction: column !important;
+        cursor: pointer;
+    }
+
+    .depth1-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        width: 100%;
+        height: 40px;
+    }
+    .find-btn button{
+        background-color: #1A5384;
+        width: 170px;
+        height: 30px;
+        border-radius: 16px;
+        color: #fff;
+
+    }
+
+    .depth1-wrap.active{
+        background-color: #307BBE;
+  
+    }
+    .depth1-wrap.active span {
+      color: #fff;
+    }
+
+    .depth2-text.active {
+       background-color: #D8EDFF;
+       border-radius: 4px;
+    }
+
+    .nav-wrap:hover .menu-text {
+        opacity: 1;
+    }
+
+    .menu-text {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 145px;
+        height: 28px;
+        opacity: 1;
+        margin-left: 8px;
+        transition: opacity 0.3s ease;
+    }
+        
+    .menu-text p {
+        white-space: noWrap;
+    }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .depth2-wrap li {
+        flex-direction: column;
+    }
+        
+    .depth2-wrap,
+    .depth3-wrap {
+        display: none;
+    }
+        
+    .depth2-wrap.open {
+        display: block;
+        width: 100%;
+    }
+
+    .depth2-wrap.open li {
+        width: 100%;
+        position: relative;   
+        padding: 10px 0px 10px 32px;
+    }
+
+    .depth2-text {
+        width: 100%;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .depth2-text svg {
+         transform: rotate(90deg) scaleY(-1); 
+    }
+    
+
+    .depth3-wrap.open {
+        display: flex;
+        align-items: center;
+        padding: 0px 20px;
+        height: 30px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-left: 1px solid #fff;
+        position: absolute;
+        top: 0;
+        left: 192px; /* 열렸을때의 nav-wrap 너비 만큼 left 해줌 */
+        z-index: 100;
+        width: 100%;
+    }
+/* 구분선 css */
+        .nav-wrap hr {
+        width: 200px;
+        margin-top: 16px;
+        margin-bottom: 0;
+        border: 0;
+        border-top: 1px solid #D6D9E0;
+
+    }
+
+    .nav-wrap:hover hr {
+        width: 200px;
+    }
