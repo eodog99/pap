@@ -10,8 +10,20 @@
 
     <script src="/static/js/include.js"></script>
     <script src="/static/js/common.js"></script>
-    <script src="/static/js/jquery-3.7.1.js"></script>
 </head>
+<style>
+    .filed-section {
+        display: flex;
+
+        align-items: center;
+        padding: 14px 35px;
+        border: 1px solid salmon;
+    }
+
+    .filed-line {
+        display: flex;
+    }
+</style>
 
 <!-- 
 폼 내용 정리
@@ -32,7 +44,64 @@
                 <h3>컨텐츠 헤더</h3>
             </div>
             <div class="content-body">
-                컨텐츠 바디
+                <div class="filed-section">
+                    <div class="filed-section--left">
+                        <div class="filed-line">
+                            <div class="filed-item">
+                                <label>품명코드</label>
+                                <input placeholder="입력하세요">
+                            </div>
+                            <div class="filed-item">
+                                <label>품명코드</label>
+                                <input placeholder="입력하세요">
+                            </div>
+                            <div class="filed-item">
+                                <label>품명코드</label>
+                                <input placeholder="입력하세요">
+                            </div>
+                            <div class="filed-item">
+                                <label>품명코드</label>
+                                <input placeholder="입력하세요">
+                            </div>
+                            <div class="filed-item">
+                                <label>품명코드</label>
+                                <input placeholder="입력하세요">
+                            </div>
+                        </div>
+                        <div class="filed-line">
+                            <div class="filed-item">
+                                <label>품명코드</label>
+                                <input placeholder="입력하세요">
+                            </div>
+                            <div class="filed-item">
+                                <label>품명코드</label>
+                                <input placeholder="입력하세요">
+                            </div>
+                            <div class="filed-item">
+                                <label>품명코드</label>
+                                <input placeholder="입력하세요">
+                            </div>
+                            <div class="filed-item">
+                                <label>품명코드</label>
+                                <input placeholder="입력하세요">
+                            </div>
+                        </div>
+                        <div class="filed-line">
+                            <div class="filed-item">
+                                <label>조회조건</label>
+                                <input type="checkbox">
+                                <input type="checkbox">
+                                <input type="checkbox">
+                                <input type="checkbox">
+                                <input type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filed-section--right">
+                        <button><span>조회</span></button>
+                    </div>
+
+                </div>
             </div>
             <div class="content-foot">
                 컨텐츠하단
@@ -43,450 +112,5 @@
     <div id="footer"></div>
 
 </body>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const currentPath = window.location.pathname; // ex) "/layout-form/layout copy.html"
-
-        // 3depth <a>들을 순회
-        document.querySelectorAll(".depth3-wrap a").forEach(link => {
-            const linkPath = link.getAttribute("href");
-
-            // 현재 경로와 a 태그의 href가 일치하는지 확인
-            if (currentPath.endsWith(linkPath)) {
-                // a → li → ul(depth3-wrap) → li → ul(depth2-wrap) → li(menu-item)
-                link.classList.add("active"); // 링크에 표시
-                link.closest(".menu-item")?.classList.add("active");
-                link.closest(".depth2-wrap")?.previousElementSibling?.classList.add("active"); // depth1 표시
-                link.closest(".depth3-wrap")?.previousElementSibling?.classList.add("active"); // depth2 표시
-            }
-        });
-    });
-
-</script>
-<!-- 
-<script>
-    var ib = ib || {};
-    ib = {
-        init: {
-            "Cfg": {
-                "SearchMode": 4,
-                "SortCurrentPage": true, // searchMode 4일떄 정렬 여부 선택
-                "MessageWidth": 300,
-                "UseHeaderSortCancel": 1,
-                "CanSort": 1,
-                "PageLength": 10,
-                InfoRowConfig: {
-                    Visible: 1,
-                    Layout: ["Paging2"], //, "Count"
-                    // ViewCount: 1,
-                    // ViewFormat: "10|20|30|50",
-                    Paging2Count: 10,
-                    Space: "Bottom"
-                }
-            },
-            "Def": {
-                "Row": {
-                    "CanFormula": true
-                }
-            },
-            LeftCols: [
-                { Header: { Value: " ", HeaderCheck: 0 }, BoolGroup: "1", Type: "Bool", Name: "CheckData", Width: 40, Align: "Center", CanEdit: 1, CanSort: 0 }
-            ],
-            Cols: [
-                { Header: "Leaf Class", Type: "Text", Name: "Leaf Class", SaveName: "LeafClass", Width: 200, Align: "Center", CanEdit: 1, CanSort: 1 },
-                { Header: "상세설명", Type: "Text", Name: "상세설명", SaveName: "상세설명", Width: 290, Align: "Center", CanEdit: 1, CanSort: 1 },
-                { Header: "품명정의서", Type: "Text", Name: "품명정의서", SaveName: "품명정의서", Width: 108, Align: "Center", CanEdit: 0, CanSort: 0 },
-                {
-                    Header: "유사품명", Type: "Img", Name: "유사품명", SaveName: "유사품명",
-                    Width: 135, Align: "Center", CanEdit: 0,
-                    Button: "Button", ToolTipText: "유사 품명을 확인하세요",
-                },
-            ]
-        },
-
-        'event': {
-            onRenderFirstFinish: function (evt) {
-                var URL = './data.json';  // 로컬에 같은 폴더에 두는 JSON 파일 경로
-                var param = {};
-
-                if (evt.sheet.SearchMode > 1) {
-                    param = {
-                        url: URL,
-                        method: 'GET',
-                        callback: function (rtn) {
-                            var rtnData = JSON.parse(rtn.data);
-                            // evt.sheet.showMessageTime('<span style=\'color:black\'>조회가 완료되었습니다.<br> 전체 데이터 건수 : ' + rtnData.Total + '</span>', 1000);
-                        }
-                    };
-                    evt.sheet.showFilterDialog();
-                    evt.sheet.doSearchPaging(param);
-                }
-            },
-            // 정렬 이벤트 핸들러 추가
-            'onSort': function (sheet, col, order) {
-                const colName = sheet.ColSaveName(col);
-                const sortDir = order === 1 ? 'asc' : 'desc';
-
-                if (!colName) {
-                    console.warn("정렬할 수 없는 컬럼입니다.");
-                    return false;
-                }
-
-                fetch('./data.json')
-                    .then(res => res.json())
-                    .then(data => {
-                        const sorted = data.Rows.sort((a, b) => {
-                            const aVal = a[colName] ?? "";
-                            const bVal = b[colName] ?? "";
-                            return sortDir === 'asc'
-                                ? (aVal > bVal ? 1 : aVal < bVal ? -1 : 0)
-                                : (aVal < bVal ? 1 : aVal > bVal ? -1 : 0);
-                        });
-
-                        // 👉 정렬된 데이터를 doSearchPaging으로 전달해야 페이징 작동
-                        sheet.doSearchPaging({
-                            data: JSON.stringify({ Rows: sorted }),
-                            method: 'POST'
-                        });
-                    });
-
-                return false;
-            },
-
-            // ============ 시트의 데이터를 클릭했을때 로컬에 저장되는 이벤트 ==============
-            // onClick: function (args) {
-            //     const sheet = args.sheet;
-            //     const row = args.row;
-            //     const col = args.col;
-
-            //     if (col === "TextData" && row.Kind === "Data") {
-            //         const codeData = row.TextData;
-            //         localStorage.setItem('form_code', codeData);
-            //         // window.close();
-            //     }
-
-            //     if (col === "CheckData" && row.CheckData === 0) {
-            //         const codeData = row.TextData;
-            //         localStorage.setItem('form_code', codeData);
-            //         // window.close();
-            //     }
-            // },
-            onShowTip: function (evtParam) {
-                // 툴팁 유사품명, Leaf Class의 경우에 나온다
-                if (evtParam.col === "유사품명") {
-                    evtParam.tip = `
-                            <div style="padding: 5px; text-align:center;">
-                                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" width="32" /><br/>
-                                <span style="font-size: 12px;">선택한 유사품명:??????????</span>*Value*
-                            </div>`;
-                    return evtParam.tip;
-                }
-                if (evtParam.col === "Leaf Class") {
-                    const cellValue = evtParam.row[evtParam.col]
-                    if (cellValue === "AVR") {
-                        evtParam.tip = `
-                            <div style="padding: 5px; text-align:center;">
-                                <div style="display: flex; gap: 12px";>
-                                    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" width="32" /><br/>
-                                    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" width="32" /><br/>
-                                    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" width="32" /><br/>
-                                </div>
-                              
-                                
-                            </div>`;
-                        return evtParam.tip;
-                    }
-
-                }
-
-            },
-        },
-        'create': function () {
-            var options = this.init;
-
-            options.Events = this.event;
-            IBSheet.create({
-                id: 'sheet', // 생성할 시트의 id
-                el: 'sheetDiv', // 시트를 생성할 Dom 객체 및 id
-                options: options, // 생성될 시트의 속성
-            });
-        },
-
-    };
-    ib.create();
-
-</script> -->
-
-<!-- 메뉴 접기 버튼 -->
-<script>
-    document.getElementById('navBtn').addEventListener('click', function () {
-        const navWrap = document.getElementById('navWrap');
-        const content = document.querySelector('.content');
-        const currentOpacity = getComputedStyle(navWrap).display;
-        if (currentOpacity === 'block') {
-            navWrap.style.display = 'none';
-            content.style.width = '100vw';
-        } else {
-            navWrap.style.display = 'block';
-            content.style.width = 'calc(100vw - 220px)';
-        }
-    });
-</script>
-
-<!--  파일 업로드 스크립트 -->
-<script>
-    $(document).ready(function () {
-        $('.file-box').each(function (index) {
-            const $box = $(this);
-            const $fileInput = $box.find('input[type="file"]');
-            const $uploadName = $box.find('.file-box__name');
-            const $uploadBtn = $box.find('.upload-btn');
-            const $previewImg = $box.find('.file-box__img');
-
-            $fileInput.on('change', function () {
-                const file = this.files[0];
-                if (!file) return;
-
-                const fileName = file.name;
-                $uploadName.val(fileName);
-                localStorage.setItem(`uploadFileName${index}`, fileName);
-
-                // 이미지 파일이면 미리보기
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        const imageUrl = e.target.result;
-                        $previewImg.attr('src', imageUrl).show();
-                        localStorage.setItem(`uploadImageBase64${index}`, imageUrl);
-                        $previewImg.css('background-color', '#fff');
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    $previewImg.css('background-color', 'transparent');
-                    $previewImg.hide(); // 이미지가 아니면 미리보기 숨김
-                }
-            });
-
-            $uploadName.on('click', function () {
-                $fileInput.trigger('click');
-            });
-
-            $uploadBtn.on('click', function () {
-                $fileInput.trigger('click');
-            });
-
-            // 저장된 파일명 불러오기
-            const savedName = localStorage.getItem(`uploadFileName${index}`);
-            if (savedName) $uploadName.val(savedName);
-
-            // 저장된 이미지 불러오기
-            const savedImg = localStorage.getItem(`uploadImageBase64${index}`);
-            if (savedImg) {
-                $previewImg.attr('src', savedImg).show();
-            }
-        });
-    });
-
-</script>
-
-
-<!-- 
-<script>
-    function initNavScript(containerSelector) {
-        //containerSeletor엔 nav-wrap가 들어감
-        const container = document.querySelector(containerSelector);
-
-        function bindDepth1Events() {
-            container.querySelectorAll(".depth1-wrap").forEach((depth1) => {
-                depth1.addEventListener("click", () => toggleDepth1(depth1));
-            });
-        }
-
-        function toggleDepth1(element) {
-            const isActive = element.classList.contains("active");
-            const menuId = element.dataset.menu;
-
-            container.querySelectorAll(".depth1-wrap").forEach((el) => {
-                el.classList.remove("active");
-                // el.nextElementSibling: el 다음 형제요소를 의미
-                // 다음 형재 요소가 있으면 open클래스를 지워라는 뜻
-                el.nextElementSibling?.classList.remove("open");
-            });
-
-            if (!isActive) {
-                element.classList.add("active");
-                element.nextElementSibling?.classList.add("open");
-
-                if (menuId) activateClosedMenu(menuId);
-            }
-        }
-
-        function bindDepth2Events() {
-            container.querySelectorAll(".depth2-text").forEach((depth2) => {
-                depth2.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    toggleDepth2(depth2);
-                });
-            });
-        }
-
-        function toggleDepth2(element) {
-            const parentWrap = element.closest(".depth2-wrap");
-            const isActive = element.classList.contains("active");
-
-            parentWrap?.querySelectorAll(".depth2-text").forEach((el) => {
-                el.classList.remove("active");
-                el.nextElementSibling?.classList.remove("open");
-            });
-
-            if (!isActive) {
-                element.classList.add("active");
-                element.nextElementSibling?.classList.add("open");
-            }
-        }
-
-        function bindDepth3Events() {
-            container.querySelectorAll(".depth3-text a").forEach((link) => {
-                link.addEventListener("click", () => {
-                    const menuId = link.closest(".depth3-wrap")?.dataset.menu;
-                    if (menuId) activateClosedMenu(menuId);
-                });
-            });
-        }
-        function activateMenuByURL() {
-            const currentPath = window.location.pathname;
-            const depth3Links = container.querySelectorAll(".depth3-wrap a");
-
-            depth3Links.forEach(link => {
-                const href = link.getAttribute("href");
-
-                if (href && currentPath.includes(href)) {
-                    // depth2-text (depth2-wrap 아래에 있음)
-                    const depth2Text = link.closest(".depth2-wrap")?.querySelector(".depth2-text");
-                    if (depth2Text) {
-                        depth2Text.classList.add("active");
-                    }
-
-                    // depth1-wrap (.menu-item > .depth1-wrap)
-                    const depth1Wrap = link.closest(".menu-item")?.querySelector(".depth1-wrap");
-                    if (depth1Wrap) {
-                        depth1Wrap.classList.add("active");
-                        depth1Wrap.nextElementSibling?.classList.add("open"); // depth2-wrap 열기
-                    }
-                }
-            });
-        }
-
-        // 실행
-        bindDepth1Events();
-        bindDepth2Events();
-        bindDepth3Events();
-        activateMenuByURL();
-    }
-    initNavScript(".nav-wrap"); // 다른 페이지에 커스텀 nav 적용 가능
-
-
-    // 클래스들을 제거함
-    function resetMenu(container) {
-        container.querySelectorAll('.depth1-wrap').forEach(el => el.classList.remove('active'));
-        container.querySelectorAll('.depth2.text').forEach(el => el.classList.remove('active'));
-        container.querySelectorAll('.depth2-wrap, .depth3-wrap').forEach(el => el.classList.remove('open'));
-
-    }
-
-
-</script> -->
-
-
-<!-- 최근 클릭한 메뉴명 선택 -->
-<script>
-    //3Depth 클릭 이벤트 등록  
-    document.querySelectorAll('.depth3-wrap li').forEach(item => {
-        item.addEventListener('click', function () {
-            //this: a를 가리킴
-            //textContent: a의 텍스트만 추출한다.
-            //trim 공백제거 
-            saveMenuClickInfo(this.textContent.trim());
-        });
-    });
-    // 클릭한 a의 텍스트를 saveMenuClickInfo를 통해 로컬 스토리지에 저장한다 
-    function saveMenuClickInfo(menuName) {
-        // 저장되는 동시에 시간도 저장
-        const now = new Date();
-        // 타임스탬프
-        const timestamp = now.toLocaleString('ko-KR', {
-            year: 'numeric', month: '2-digit', day: '2-digit',
-            hour: '2-digit', minute: '2-digit', second: '2-digit'
-        });
-
-        // 클릭한 메뉴 정보를 객체로 만들어 저장할 준비
-        const newEntry = {
-            name: menuName,
-            time: timestamp
-        };
-        // localStorage.getItem('menuHistory'): 로컬스토리지에서 항목을 몬자열 형재로 가져옴
-        // JSON.parse(...) : 문자열을 자바스크립트 배열 객체로 변환 
-        let menuHistory = JSON.parse(localStorage.getItem('menuHistory')) || []; // 빈배열로 초기화 , 저장된 데이터가 있으면 불러옴
-        //같은 메뉴가 이미 있을 경우, 기존 것을 먼저 지웁니다.
-        menuHistory = menuHistory.filter(item => item.name !== menuName);
-        // unshift()는 배열의 맨 앞 요소를 추가한다.(최신 클릭이 위로 오게)
-        menuHistory.unshift(newEntry);
-        if (menuHistory.length > 3) { // 최대 개수 3개 
-            menuHistory = menuHistory.slice(0, 3); // 배열의 첨 3개 남기고 나머지 자름
-        }
-
-        // 로컬스토리지에 다시 저장, 배열을 문자열로 바꿔서 다시 저장?(stringify)
-        localStorage.setItem('menuHistory', JSON.stringify(menuHistory));
-        renderRecentMenus(); // 저장 후 리스트 다시 그리기
-    }
-
-
-    function renderRecentMenus() {
-        const list = document.getElementById('recentMenuList');
-        if (!list) return; // 요소가 없으면 함수 종료 (오류 방지)
-
-        const menuHistory = JSON.parse(localStorage.getItem('menuHistory')) || [];
-
-        list.innerHTML = '';
-
-        menuHistory.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = `${item.name} (${item.time})`;
-            list.appendChild(li);
-        });
-    }
-
-
-
-
-    // 페이지 로딩 시 기존 목록 표시
-    document.addEventListener('DOMContentLoaded', renderRecentMenus);
-</script>
-
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const currentPath = window.location.pathname;
-        const depth3Links = document.querySelectorAll(".depth3-wrap li a");
-
-        depth3Links.forEach(link => {
-            const href = link.getAttribute("href");
-
-            if (href && currentPath.includes(href)) {
-                // 3depth li
-                const depth3Li = link.closest("li");
-
-                // 2depth li
-                const depth2Li = depth3Li.closest("ul.depth3-wrap")?.closest("li");
-                if (depth2Li) depth2Li.classList.add("active");
-
-                // 1depth li (menu-item)
-                const menuItem = depth2Li?.closest("ul.depth2-wrap")?.closest("li.menu-item");
-                if (menuItem) menuItem.classList.add("active");
-            }
-        });
-    });
-</script>
 
 </html>
